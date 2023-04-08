@@ -2,7 +2,6 @@ package com.safetynet.alerts.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,9 +13,6 @@ class DataRepositoryTest {
 	
 	@Autowired
 	private DataRepository dataRepository;
-
-	@Autowired
-	private Data data;
 	
 	@Test
 	void testReadJsonFile() {

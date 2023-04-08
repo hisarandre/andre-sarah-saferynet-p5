@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.safetynet.alerts.MockData;
 import com.safetynet.alerts.model.Data;
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Person;
 
 @SpringBootTest
 class FirestationRepositoryTest {
