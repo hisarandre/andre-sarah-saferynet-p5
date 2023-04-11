@@ -45,7 +45,6 @@ public class FirestationRepository {
     		} 
     		data.getFirestations().removeAll(found);
     	}
-    
     }
     
     public void udapteFirestation(Firestation firestation, String address) {
@@ -57,6 +56,30 @@ public class FirestationRepository {
         		break;
     		}
     	}
-        
+    }
+    
+    public List<String> findAdressesByStation(String station) {
+    	List<Firestation> firestationsList = data.getFirestations();
+    	List<String> addressesByStation = new ArrayList<>();
+    	
+    	for(Firestation f : firestationsList) {
+			if((f.getStation().equals(station))) {
+				addressesByStation.add(f.getAddress());
+			}
+		} 
+    	
+    	return addressesByStation;
+    }
+    
+    public String findStationByAddress(String address) {
+    	List<Firestation> firestationsList = data.getFirestations();
+    	
+    	for(Firestation f : firestationsList) {
+			if((f.getAddress().equals(address))) {
+				return f.getStation();
+			}
+		} 
+    	
+    	return null;
     }
 }

@@ -1,5 +1,9 @@
 package com.safetynet.alerts.repository;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +27,8 @@ public class MedicalRecordRepository {
     }
     
     public void deleteMedicalRecord(String firstName, String lastName){
-    	MedicalRecord medicalRecord = findByName(firstName,lastName);
-    	data.getMedicalrecords().remove(medicalRecord);
+    	List<MedicalRecord> medicalRecord = findByName(firstName,lastName);
+    	data.getMedicalrecords().removeAll(medicalRecord);
     }
     
     public void udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName) {
@@ -39,14 +43,26 @@ public class MedicalRecordRepository {
     	}
     }
     
-    public MedicalRecord findByName(String firstName, String lastName) {
+    public List<MedicalRecord> findByName(String firstName, String lastName) {
     	List<MedicalRecord> medicalRecordsList = data.getMedicalrecords();
+    	List<MedicalRecord> found = new ArrayList<>();
     	
     	for(MedicalRecord mr : medicalRecordsList) {
     		if((mr.getFirstName().equals(firstName)) && (mr.getLastName()).equals(lastName)) {
-    			return mr;
+    			found.add(mr);
             }
     	}
-		return null;
+		return found;
+    }
+    
+    public int calculateAge(String date) {
+    	LocalDate today = LocalDate.now();
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/d/yyyy");
+    	LocalDate birthday = LocalDate.parse(date, formatter); 
+    	    	
+    	int age = Period.between(birthday,today).getYears();
+    	
+		return age;
     }
 }

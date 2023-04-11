@@ -1,5 +1,6 @@
 package com.safetynet.alerts.controller;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,10 @@ public class PersonController {
     public void udaptePerson(@RequestBody Person person, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {       
     	personService.udaptePerson(person, firstName, lastName);
     }
+    
+    @GetMapping("/communityEmail")
+    public HashSet<String> getAllEmailsByCity(@RequestParam(name = "city") String city) {       
+    	return personService.getAllEmailsByCity(city);
+    }
+    
 }

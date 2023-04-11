@@ -71,20 +71,20 @@ public class PersonRepositoryTest {
     
     @Test
     public void testFindPersonByName() throws Exception{
-    	Person person = personRepository.findByName("Jay", "Dean");
-        assertEquals("Jay", person.getFirstName());
+    	List<Person> person = personRepository.findByName("Jay", "Dean");
+        assertEquals("Jay", person.get(0).getFirstName());
     }
     
     @Test
     public void testFindPersonByNameIfPersonNotExist() throws Exception{
-    	Person person = personRepository.findByName("Adam", "Lannister");
-        assertNull(person);
+    	List<Person> person = personRepository.findByName("Adam", "Lannister");
+    	assertEquals(person.size(), 0);
     }
     
     @Test
     public void testFindPersonByNameIfMissingLastname() throws Exception{
-    	Person person = personRepository.findByName("Jay", "");
-        assertNull(person);
+    	List<Person> person = personRepository.findByName("Jay", "");
+    	assertEquals(person.size(), 0);
     }
     
     @Test

@@ -1,5 +1,6 @@
 package com.safetynet.alerts.service;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,9 @@ public class PersonService {
     
     public void udaptePerson(Person person, String firstName, String lastName){
         personRepository.udaptePerson(person, firstName, lastName);
+    }
+    
+    public HashSet<String> getAllEmailsByCity(String city){
+        return personRepository.getAllEmailsByCity(city);
     }
 }

@@ -1,5 +1,7 @@
 package com.safetynet.alerts.repository;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,8 @@ public class PersonRepository {
     }
     
     public void deletePerson(String firstName, String lastName) {
-    	Person person = findByName(firstName, lastName);    	
-        data.getPersons().remove(person);
+    	 List<Person> person = findByName(firstName, lastName);    	
+        data.getPersons().removeAll(person);
     }
     
     public void udaptePerson(Person person, String firstName, String lastName) {
@@ -41,15 +43,40 @@ public class PersonRepository {
     	}
     }
     
-    public Person findByName(String firstName, String lastName) {
+    public List<Person> findByName(String firstName, String lastName) {
     	List<Person> personsList = data.getPersons();
+    	List<Person> found = new ArrayList<>();
     	
     	for(Person p : personsList) {
     		if((p.getFirstName().equals(firstName)) && (p.getLastName()).equals(lastName)) {
-    			return p;
+    			found.add(p);
             }
     	}
-		return null;
+		return found;
+    }
+    
+    public HashSet<String> getAllEmailsByCity(String city) {
+    	HashSet<String> emails = new HashSet<String>();
+    	List<Person> personsList = data.getPersons();
+    	
+    	for(Person p : personsList) {
+			if((p.getCity().equals(city))) {
+				emails.add(p.getEmail());
+			}
+		}
+    	return emails;
+    }
+    
+    public List<Person> findByAddress(String address) {
+    	List<Person> personsList = data.getPersons();
+    	List<Person> found = new ArrayList<>();
+    	
+    	for(Person p : personsList) {
+    		if((p.getAddress().equals(address))) {
+    			found.add(p);
+            }
+    	}
+		return found;
     }
     
 }
