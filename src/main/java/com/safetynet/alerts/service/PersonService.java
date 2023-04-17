@@ -1,6 +1,5 @@
 package com.safetynet.alerts.service;
 
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +26,14 @@ public class PersonService {
         personRepository.createPerson(person);
     }
     
-    public void deletePerson(String firstName, String lastName){
-        personRepository.deletePerson(firstName, lastName);
+    public List<Person> deletePerson(String firstName, String lastName){
+        return personRepository.deletePerson(firstName, lastName);
     }
     
-    public void udaptePerson(Person person, String firstName, String lastName){
-        personRepository.udaptePerson(person, firstName, lastName);
+    public Person udaptePerson(Person person, String firstName, String lastName){
+        return personRepository.udaptePerson(person, firstName, lastName);
+    	
     }
     
-    public HashSet<String> getAllEmailsByCity(String city){
-        return personRepository.getAllEmailsByCity(city);
-    }
+    
 }

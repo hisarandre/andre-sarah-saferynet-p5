@@ -33,7 +33,7 @@ public class MedicalRecordRepositoryTest {
     private DataRepository dataRepository;
     
     @BeforeEach()
-    public void setUp(){
+    public void setUp() throws Exception{
     	data = mockData.getAllMockData();
         Mockito.when(dataRepository.read(anyString())).thenReturn(data);
     }

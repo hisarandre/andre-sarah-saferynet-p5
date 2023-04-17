@@ -32,7 +32,7 @@ class FirestationRepositoryTest {
     private DataRepository dataRepository;
     
     @BeforeEach()
-    public void setUp(){
+    public void setUp() throws Exception{
     	data = mockData.getAllMockData();
         Mockito.when(dataRepository.read(anyString())).thenReturn(data);
     }
@@ -42,7 +42,7 @@ class FirestationRepositoryTest {
     	List<Firestation> listFirestation= firestationRepository.getAllFirestations();
         assertEquals(3, listFirestation.size());
     }
-    
+
     @Test
     public void testCreateFirestation() throws Exception{
     	Firestation firestation = new Firestation();

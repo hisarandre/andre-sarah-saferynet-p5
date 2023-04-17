@@ -32,11 +32,11 @@ public class MockData {
         p1.setLastName("Dean");
 
         Person p2 = new Person();
-        p2.setAddress("2 rue grande");
+        p2.setAddress("3 rue grande");
         p2.setCity("Lyon");
         p2.setEmail("nathan@gmail.com");
         p2.setPhone("08799009");
-        p1.setZip("69000");
+        p2.setZip("69000");
         p2.setFirstName("Nathan");
         p2.setLastName("Han");
 
@@ -45,9 +45,10 @@ public class MockData {
         p3.setCity("Lyon");
         p3.setEmail("alix@gmail.com");
         p3.setPhone("0711121314");
-        p1.setZip("69000");
+        p3.setZip("69000");
         p3.setFirstName("Alix");
         p3.setLastName("Han");
+       
 
         mockPersons.add(p1);
         mockPersons.add(p2);
@@ -60,11 +61,11 @@ public class MockData {
         f1.setStation("1");
 
         Firestation f2 = new Firestation();
-        f2.setAddress("9 rue petite");
+        f2.setAddress("1 rue petite");
         f2.setStation("2");
 
         Firestation f3 = new Firestation();
-        f3.setAddress("9 rue moyenne");
+        f3.setAddress("3 rue grande");
         f3.setStation("3");
 
         mockFirestations.add(f1);
@@ -81,14 +82,14 @@ public class MockData {
         MedicalRecord m1 = new MedicalRecord();
         m1.setFirstName("Alix");
         m1.setLastName("Han");
-        m1.setBirthdate("18/05/1992");
+        m1.setBirthdate("08/05/1992");
         m1.setAllergies(mockAllergies);
         m1.setMedications(mockMedications);
 
         MedicalRecord m2 = new MedicalRecord();
         m2.setFirstName("Nathan");
         m2.setLastName("Han");
-        m2.setBirthdate("30/01/2000");
+        m2.setBirthdate("03/01/2010");
         m1.setAllergies(mockAllergies);
         m1.setMedications(mockMedications);
 

@@ -32,7 +32,7 @@ public class PersonRepositoryTest {
     private DataRepository dataRepository;
     
     @BeforeEach()
-    public void setUp(){
+    public void setUp() throws Exception{
     	data = mockData.getAllMockData();
         Mockito.when(dataRepository.read(anyString())).thenReturn(data);
     }
@@ -103,6 +103,13 @@ public class PersonRepositoryTest {
     	List<Person> listPersons = data.getPersons();
     	Person Dean= listPersons.get(0);
         assertEquals("4 rue petite", Dean.getAddress());
+    }
+    
+    @Test
+    public void testFindByAddress() throws Exception{
+    	List<Person> person = personRepository.findByAddress("1 rue petite");
+    	assertEquals("1 rue petite", person.get(0).getAddress());
+
     }
     
 }

@@ -1,8 +1,5 @@
 package com.safetynet.alerts.repository;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,31 +15,73 @@ public class MedicalRecordRepository {
     @Autowired
     private Data data;
 
+    /**
+     * Rretrieves all the medical records
+     * 
+     * @return a list of all the medical records
+     */
     public List<MedicalRecord> getAllMedicalRecords() {
         return data.getMedicalrecords();
     }
-    
+
+    /**
+     * Creates a new medical record.
+     * 
+     * @param medicalRecord the new medical record to be created
+     */
     public void createMedicalRecord(MedicalRecord medicalRecord){
     	data.getMedicalrecords().add(medicalRecord);
     }
-    
-    public void deleteMedicalRecord(String firstName, String lastName){
+
+    /**
+     * Deletes an existing medical record by firstname and lastname.
+     * 
+     * @param firstName the first name of the person
+     * @param lastName the last name of the person
+     * @return MedicalRecord the medical record deleted
+     */
+    public List<MedicalRecord> deleteMedicalRecord(String firstName, String lastName){
     	List<MedicalRecord> medicalRecord = findByName(firstName,lastName);
     	data.getMedicalrecords().removeAll(medicalRecord);
+    	return medicalRecord;
     }
-    
-    public void udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName) {
+
+    /**
+     * Updates an existing medical record by first name and last name.
+     * 
+     * @param medicalRecord the updated medical record
+     * @param firstName the firstname of the person
+     * @param lastName the lastname of the person
+     * @return MedicalRecord the medical record udapted
+     */
+    public MedicalRecord udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName) {
     	List<MedicalRecord> medicalrecordsList = data.getMedicalrecords();
     	
+    	String newBirthdate= medicalRecord.getBirthdate();
+    	List<String> newAllergies = medicalRecord.getAllergies();
+    	List<String> newMedications = medicalRecord.getMedications();
+    			
     	for(MedicalRecord mr : medicalrecordsList) {
     		if((mr.getFirstName().equals(firstName)) && (mr.getLastName()).equals(lastName)) {
-    			mr.setBirthdate(medicalRecord.getBirthdate());
-    			mr.setMedications(medicalRecord.getMedications());
-    			mr.setAllergies(medicalRecord.getAllergies());
+    			
+    			if(newBirthdate != null) mr.setBirthdate(newBirthdate);
+    	    	if(newAllergies != null) mr.setAllergies(newAllergies);
+    	    	if(newMedications != null) mr.setMedications(newMedications);
+    	    	
+    	    	return mr;
             }
     	}
+    	
+    	return null;
     }
-    
+
+    /**
+     * Search for a medical record by firstname and lastname.
+     * 
+     * @param firstName the firstname of the person
+     * @param lastName the lastname of the person
+     * @return a list of medical records
+     */
     public List<MedicalRecord> findByName(String firstName, String lastName) {
     	List<MedicalRecord> medicalRecordsList = data.getMedicalrecords();
     	List<MedicalRecord> found = new ArrayList<>();
@@ -52,17 +91,7 @@ public class MedicalRecordRepository {
     			found.add(mr);
             }
     	}
-		return found;
+    	return found;
     }
     
-    public int calculateAge(String date) {
-    	LocalDate today = LocalDate.now();
-    	
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/d/yyyy");
-    	LocalDate birthday = LocalDate.parse(date, formatter); 
-    	    	
-    	int age = Period.between(birthday,today).getYears();
-    	
-		return age;
-    }
 }

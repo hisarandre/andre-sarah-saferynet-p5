@@ -1,5 +1,6 @@
 package com.safetynet.alerts.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,36 @@ public class FirestationService {
         firestationRepository.createFirestation(firestation);
     }
     
-    public void deleteFirestation(String address, String station){
-        firestationRepository.deleteFirestation(address, station);
+    public List<Firestation> deleteFirestation(String address, String station){
+        return firestationRepository.deleteFirestation(address, station);
     }
     
-    public void udapteFirestation(Firestation firestation, String address) {
-    	firestationRepository.udapteFirestation(firestation, address);
+    public Firestation udapteFirestation(Firestation firestation, String address) {
+    	return firestationRepository.udapteFirestation(firestation, address);
     }
     
+    public List<String> findAdressesByStation(String station) {
+    	List<String> addressesByStation = new ArrayList<>();
+
+    	List<Firestation> firestationsList = firestationRepository.getAllFirestations();
+    		    	
+	    for(Firestation f : firestationsList) {
+			if((f.getStation().equals(station))) {
+				addressesByStation.add(f.getAddress());
+			}
+		}
+    	
+	    return addressesByStation;
+    }
+    
+    public String findStationByAddress(String address) {
+    	List<Firestation> firestationsList = firestationRepository.getAllFirestations();
+    	
+    	for(Firestation f : firestationsList) {
+			if((f.getAddress().equals(address))) {
+				return f.getStation();
+			}
+		} 
+    	return null;
+    }
 }

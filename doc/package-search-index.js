@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.safetynet.alerts.model"},{"l":"com.safetynet.alerts.model.DTO"},{"l":"com.safetynet.alerts.service"}];updateSearchResults();

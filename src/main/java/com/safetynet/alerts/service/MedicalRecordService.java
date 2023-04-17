@@ -1,5 +1,8 @@
 package com.safetynet.alerts.service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +29,23 @@ public class MedicalRecordService {
         medicalRecordRepository.createMedicalRecord(medicalRecord); 
     }
     
-    public void deleteMedicalRecord(String firstName, String lastName){
-        medicalRecordRepository.deleteMedicalRecord(firstName, lastName); 
+    public List<MedicalRecord> deleteMedicalRecord(String firstName, String lastName){
+        return medicalRecordRepository.deleteMedicalRecord(firstName, lastName); 
     }
     
-    public void udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName){
-    	medicalRecordRepository.udapteMedicalRecord(medicalRecord, firstName, lastName);
+    public MedicalRecord udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName){
+    	return medicalRecordRepository.udapteMedicalRecord(medicalRecord, firstName, lastName);
+    }
+    
+    public int calculateAge(String date) {
+    	LocalDate today = LocalDate.now();
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/d/yyyy");
+    	LocalDate birthday = LocalDate.parse(date, formatter); 
+    	    	
+    	int age = Period.between(birthday,today).getYears();
+    	
+		return age;
     }
     
 }

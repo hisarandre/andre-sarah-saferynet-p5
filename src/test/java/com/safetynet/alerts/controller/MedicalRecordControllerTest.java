@@ -1,17 +1,30 @@
 package com.safetynet.alerts.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.safetynet.alerts.service.MedicalRecordService;
+import com.safetynet.alerts.model.MedicalRecord;
+import com.safetynet.alerts.model.DTO.EmptyJsonDTO;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,9 +33,25 @@ public class MedicalRecordControllerTest {
 	@Autowired
 	public MockMvc mvc;
 	
+    @InjectMocks
+    private MedicalRecordController medicalRecordController;
+    
+    @Mock
+    private MedicalRecordService medicalRecordService;
+	
     @Test
     public void testGetMedicalRecord() throws Exception{
 		mvc.perform(get("/medicalrecord")).andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testGetAllMedicalRecordWhenNotFound() {
+        List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        when(medicalRecordService.getAllMedicalRecords()).thenReturn(medicalRecordList);
+
+        ResponseEntity<Object> response = medicalRecordController.getAllMedicalRecord();
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
 	@Test
@@ -35,6 +64,7 @@ public class MedicalRecordControllerTest {
         .content(newMedicalRecord))
         .andExpect(status().isOk()); 
     }
+	
 	
 	@Test
     public void testPostMedicalRecordIfNoContentSent() throws Exception{
@@ -52,28 +82,31 @@ public class MedicalRecordControllerTest {
     }
 	
 	@Test
-    public void testDeleteMedicalRecordIfMissingName() throws Exception{
-		mvc.perform(delete("/medicalrecord")).andExpect(status().isBadRequest());
-    }
+	public void testDeleteMedicalRecordNotFound() {
+	    String firstName = "John";
+	    String lastName = "Doe";
+	    
+	    when(medicalRecordService.deleteMedicalRecord(firstName, lastName)).thenReturn(new ArrayList<>());
+	    
+	    ResponseEntity<Object> response = medicalRecordController.deleteMedicalRecord(firstName, lastName);
+	    
+	    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+	    assertTrue(response.getBody() instanceof EmptyJsonDTO);
+	}
 	
-	@Test
-    public void testPutPerson() throws Exception{
-        String newMedicalRecord = "{\"firstName\":\"jon\",\"lastName\":\"snow\",\"birthdate\":\"30/03/2000\",\"medications\":[\"ibupurin:200mg\",\"hydrapermazol:400mg\"],\"allergies\":[\"nillacilan\"]}";
-
-		mvc.perform(put("/medicalrecord?firstName=jon&lastName=snow")
-	    .contentType(MediaType.APPLICATION_JSON)
-	    .content(newMedicalRecord))
-	    .andExpect(status().isOk()); 
+    @Test
+    public void testUpdateMedicalRecordWithNullResult() {
+        MedicalRecord medicalRecord = new MedicalRecord();
+        String firstName = "John";
+        String lastName = "Doe";
+        
+        when(medicalRecordService.udapteMedicalRecord(medicalRecord, firstName, lastName)).thenReturn(null);
+        
+        ResponseEntity<Object> response = medicalRecordController.udapteMedicalRecord(medicalRecord, firstName, lastName);
+		
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertTrue(response.getBody() instanceof EmptyJsonDTO);
     }
-	
-	@Test
-    public void testPutPersonIfMissingName() throws Exception{
-	    String newMedicalRecord = "{\"firstName\":\"jon\",\"lastName\":\"snow\",\"address\":\"une rue\",\"city\":\"une ville\",\"zip\":\"00000\",\"phone\":\"000-111-2222\",\"email\":\"js.stark@mail.com\"}";
 
-		mvc.perform(put("/medicalrecord")
-	    .contentType(MediaType.APPLICATION_JSON)
-	    .content(newMedicalRecord))
-        .andExpect(status().isBadRequest());
-    }
 }
 
