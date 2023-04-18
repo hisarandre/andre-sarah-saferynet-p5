@@ -99,5 +99,71 @@ public class MedicalRecordControllerTest {
 	    
 	    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 	}
+	
+
+    @Test
+    public void testUpdateMedicalRecord() throws Exception{
+    	MedicalRecord udaptedMedicalRecord = new MedicalRecord();
+    	List<String> allergies = new ArrayList<>();
+        List<String> medications = new ArrayList<>();
+        allergies.add("cats");
+        allergies.add("peanuts");
+        medications.add("tetracyclaz:650mg");
+        medications.add("dodoxadin:30mg");
+    	udaptedMedicalRecord.setFirstName("John");
+    	udaptedMedicalRecord.setLastName("Doe");
+    	udaptedMedicalRecord.setBirthdate("08/05/1992");
+    	udaptedMedicalRecord.setAllergies(allergies);
+    	udaptedMedicalRecord.setMedications(medications);
+        
+
+        String newMedicalRecord = "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"birthdate\":\"30/03/2000\",\"medications\":[\"ibupurin:200mg\",\"hydrapermazol:400mg\"],\"allergies\":[\"nillacilan\"]}";
+
+        
+        when(medicalRecordService.udapteMedicalRecord(any(MedicalRecord.class), anyString(), anyString())).thenReturn(udaptedMedicalRecord);
+         
+        mvc.perform(put("/medicalrecord")
+        		.param("firstName", "John")
+        		.param("lastName", "Doe")
+        		.contentType(MediaType.APPLICATION_JSON)
+        		.content(newMedicalRecord))
+        		.andExpect(status().isOk());
+        
+        verify(medicalRecordService, times(1)).udapteMedicalRecord(any(MedicalRecord.class), anyString(), anyString());
+    }
+    
+    @Test
+    public void testUpdateMedicalRecord_3() throws Exception {
+    	//MedicalRecord mr = new MedicalRecord();
+        //when(medicalRecordService.getAllMedicalRecords(anyLong())).thenReturn(mr);
+        when(medicalRecordService.udapteMedicalRecord(any(MedicalRecord.class), anyString(),anyString())).thenReturn(new MedicalRecord());
+        mvc.perform(put("/medicalrecords/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testUpdateMedicalRecord_2() {
+    	MedicalRecord udaptedMedicalRecord = new MedicalRecord();
+    	List<String> allergies = new ArrayList<>();
+        List<String> medications = new ArrayList<>();
+        allergies.add("cats");
+        allergies.add("peanuts");
+        medications.add("tetracyclaz:650mg");
+        medications.add("dodoxadin:30mg");
+    	udaptedMedicalRecord.setFirstName("John");
+    	udaptedMedicalRecord.setLastName("Doe");
+    	udaptedMedicalRecord.setBirthdate("08/05/1992");
+    	udaptedMedicalRecord.setAllergies(allergies);
+    	udaptedMedicalRecord.setMedications(medications);
+        
+        when(medicalRecordService.udapteMedicalRecord(any(MedicalRecord.class), anyString(), anyString())).thenReturn(udaptedMedicalRecord);
+        
+        ResponseEntity<Object> response = medicalRecordController.getAllMedicalRecord();
+        
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
 }
 
