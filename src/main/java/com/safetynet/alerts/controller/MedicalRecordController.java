@@ -104,9 +104,13 @@ public class MedicalRecordController {
      * @return ResponseEntity containing the updated medical record and an HTTP status code
      */
     @PutMapping("/medicalrecord")
-    public ResponseEntity<Object> udapteMedicalRecord(@RequestBody MedicalRecord medicalrecord, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {       
+    public ResponseEntity<Object> udapteMedicalRecord(@RequestBody MedicalRecord medicalrecord, 
+    		@RequestParam(name = "firstName") String firstName, 
+    		@RequestParam(name = "lastName") String lastName) {       
     	LOGGER.debug("Request PUT: Udapting " + firstName + lastName + "'s medicalrecord");
     	MedicalRecord medicalRecordUdapted = medicalRecordService.udapteMedicalRecord(medicalrecord, firstName, lastName);
+    	
+    	System.out.println(medicalRecordUdapted);
     	
     	if(medicalRecordUdapted != null){
         	LOGGER.info("Medical record is updated");
