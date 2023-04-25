@@ -88,7 +88,7 @@ public class PersonRepositoryTest {
     }
     
     @Test
-    public void testUdaptePerson() throws Exception{
+    public void testupdatePerson() throws Exception{
     	Person person= new Person();
     	person.setAddress("4 rue petite");
     	person.setCity("Lyon");
@@ -98,7 +98,7 @@ public class PersonRepositoryTest {
     	person.setFirstName("Jay");
     	person.setLastName("Dean");
     	
-    	personRepository.udaptePerson(person,"Jay","Dean");
+    	personRepository.updatePerson(person,"Jay","Dean");
     	
     	List<Person> listPersons = data.getPersons();
     	Person Dean= listPersons.get(0);

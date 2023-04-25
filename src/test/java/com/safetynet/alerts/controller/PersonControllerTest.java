@@ -104,7 +104,7 @@ public class PersonControllerTest {
 	    mockResponse.setPhone("000-111-2222");
 	    mockResponse.setEmail("js.stark@mail.com");
 
-	    when(personService.udaptePerson(any(Person.class), eq("John"), eq("Doe"))).thenReturn(mockResponse);
+	    when(personService.updatePerson(any(Person.class), eq("John"), eq("Doe"))).thenReturn(mockResponse);
 
 	    String updatedPerson = "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"address\":\"une rue\",\"city\":\"une ville\",\"zip\":\"00000\",\"phone\":\"000-111-2222\",\"email\":\"js.stark@mail.com\"}";
 
@@ -117,12 +117,12 @@ public class PersonControllerTest {
 	}
 		
 	@Test
-	public void testUdaptePersonNotFound() throws Exception {
+	public void testupdatePersonNotFound() throws Exception {
 	    String firstName = "John";
 	    String lastName = "Doe";
 	    String requestBody = "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"address\":\"9 rue grande\",\"city\":\"New York\",\"zip\":\"12345\",\"phone\":\"9876543210\",\"email\":\"johndoe@example.com\"}";
 
-	    when(personService.udaptePerson(any(Person.class), eq(firstName), eq(lastName))).thenReturn(null);
+	    when(personService.updatePerson(any(Person.class), eq(firstName), eq(lastName))).thenReturn(null);
 
 	    mvc.perform(put("/person")
 	            .param("firstName", firstName)

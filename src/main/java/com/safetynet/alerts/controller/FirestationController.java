@@ -76,18 +76,18 @@ public class FirestationController {
     }
     
     /**
-     * Request PUT : udapte a firestation by address.
+     * Request PUT : update a firestation by address.
      * 
-     * @param firestation the udapted firestation 
+     * @param firestation the updated firestation 
      * @param address the station address
-     * @return ResponseEntity containing firestation udapted and an HTTP status code
+     * @return ResponseEntity containing firestation updated and an HTTP status code
      */
     @PutMapping("/firestation")
-    public ResponseEntity<Object> udapteFirestation(@RequestBody Firestation firestation, @RequestParam(name = "address") String address) {  
+    public ResponseEntity<Object> updateFirestation(@RequestBody Firestation firestation, @RequestParam(name = "address") String address) {  
     	LOGGER.debug("Request PUT: Udapting " + firestation.getStation());
-    	Firestation firestationUdapted = firestationService.udapteFirestation(firestation, address);
+    	Firestation firestationupdated = firestationService.updateFirestation(firestation, address);
     	
-    	if(firestationUdapted != null){
+    	if(firestationupdated != null){
         	LOGGER.info("Firestation is updated :" + firestation);
     		return new ResponseEntity<>(firestation, HttpStatus.OK);
 	    } else {

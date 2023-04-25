@@ -96,25 +96,25 @@ public class MedicalRecordController {
     }
     
     /**
-     * Request PUT : udapte a medicalrecord by firstName and lastName.
+     * Request PUT : update a medicalrecord by firstName and lastName.
      * 
-     * @param medicalrecord the udapted infos of medicalrecord 
+     * @param medicalrecord the updated infos of medicalrecord 
      * @param firstName the person's firstname
      * @param lastName the person's lastname
      * @return ResponseEntity containing the updated medical record and an HTTP status code
      */
     @PutMapping("/medicalrecord")
-    public ResponseEntity<Object> udapteMedicalRecord(@RequestBody MedicalRecord medicalrecord, 
+    public ResponseEntity<Object> updateMedicalRecord(@RequestBody MedicalRecord medicalrecord, 
     		@RequestParam(name = "firstName") String firstName, 
     		@RequestParam(name = "lastName") String lastName) {       
     	LOGGER.debug("Request PUT: Udapting " + firstName + lastName + "'s medicalrecord");
-    	MedicalRecord medicalRecordUdapted = medicalRecordService.udapteMedicalRecord(medicalrecord, firstName, lastName);
+    	MedicalRecord medicalRecordupdated = medicalRecordService.updateMedicalRecord(medicalrecord, firstName, lastName);
     	
-    	System.out.println(medicalRecordUdapted);
+    	System.out.println(medicalRecordupdated);
     	
-    	if(medicalRecordUdapted != null){
+    	if(medicalRecordupdated != null){
         	LOGGER.info("Medical record is updated");
-    		return new ResponseEntity<>(medicalRecordUdapted, HttpStatus.OK);
+    		return new ResponseEntity<>(medicalRecordupdated, HttpStatus.OK);
 	    } else {
 	        LOGGER.error("Failed to update :" + medicalrecord);
 	        return new ResponseEntity<>(new EmptyJsonDTO(),HttpStatus.NOT_FOUND);

@@ -81,7 +81,7 @@ public class FirestationRepository {
      * @param firestation the firestation with the new address
      * @param address the current address of the firestation
      */
-    public Firestation udapteFirestation(Firestation firestation, String address) {    	
+    public Firestation updateFirestation(Firestation firestation, String address) {    	
 	    List<Firestation> firestationsList = data.getFirestations();
 	
 	    for(Firestation f : firestationsList){

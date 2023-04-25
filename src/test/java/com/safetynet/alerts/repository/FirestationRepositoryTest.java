@@ -75,12 +75,12 @@ class FirestationRepositoryTest {
     }
     
     @Test
-    public void testUdapteFirestation() throws Exception{
+    public void testupdateFirestation() throws Exception{
     	Firestation firestation = new Firestation();
         firestation.setAddress("9 rue grande");
         firestation.setStation("1");
     	
-        firestationRepository.udapteFirestation(firestation,"10 rue grande");
+        firestationRepository.updateFirestation(firestation,"10 rue grande");
     	
     	List<Firestation> listFirestation= data.getFirestations();
 

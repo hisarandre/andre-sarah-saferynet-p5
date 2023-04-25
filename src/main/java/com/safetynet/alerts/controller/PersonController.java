@@ -95,21 +95,21 @@ public class PersonController {
     }
     
     /**
-     * Request PUT : udapte a person by firstName and lastName.
+     * Request PUT : update a person by firstName and lastName.
      * 
-     * @param person the udapted person's infos
+     * @param person the updated person's infos
      * @param firstName the person's firstname
      * @param lastName the person's lastname
      * @return ResponseEntity containing the updated Person object and an HTTP status code
      */
     @PutMapping("/person")
-    public ResponseEntity<Object> udaptePerson(@RequestBody Person person, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {       
+    public ResponseEntity<Object> updatePerson(@RequestBody Person person, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {       
     	LOGGER.debug("Request PUT: Udapting " + firstName + lastName + "infos");
-    	Person personUdapted = personService.udaptePerson(person, firstName, lastName);
+    	Person personupdated = personService.updatePerson(person, firstName, lastName);
     	
-    	if(personUdapted != null){
-        	LOGGER.info("Person is udapted");
-    		return new ResponseEntity<>(personUdapted, HttpStatus.OK);
+    	if(personupdated != null){
+        	LOGGER.info("Person is updated");
+    		return new ResponseEntity<>(personupdated, HttpStatus.OK);
 	    } else {
 	        LOGGER.error("Failed to update :" + person);
 	        return new ResponseEntity<>(new EmptyJsonDTO(),HttpStatus.NOT_FOUND);

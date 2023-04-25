@@ -76,7 +76,7 @@ public class MedicalRecordRepositoryTest {
     }
     
     @Test
-    public void testUdapteMedicalRecord() throws Exception{
+    public void testupdateMedicalRecord() throws Exception{
         List<String> allergies = new ArrayList<>();
         List<String> medications = new ArrayList<>();
     	allergies.add("cats");
@@ -91,7 +91,7 @@ public class MedicalRecordRepositoryTest {
         medicalRecord.setAllergies(allergies);
         medicalRecord.setMedications(medications);
     	
-        medicalRecordRepository.udapteMedicalRecord(medicalRecord,"Alix","Han");
+        medicalRecordRepository.updateMedicalRecord(medicalRecord,"Alix","Han");
     	
     	List<MedicalRecord> listMedicalRecords = data.getMedicalrecords();
     	MedicalRecord Alix= listMedicalRecords.get(0);

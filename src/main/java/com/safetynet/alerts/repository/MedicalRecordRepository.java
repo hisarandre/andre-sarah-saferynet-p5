@@ -52,9 +52,9 @@ public class MedicalRecordRepository {
      * @param medicalRecord the updated medical record
      * @param firstName the firstname of the person
      * @param lastName the lastname of the person
-     * @return MedicalRecord the medical record udapted
+     * @return MedicalRecord the medical record updated
      */
-    public MedicalRecord udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName) {
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName) {
     	List<MedicalRecord> medicalrecordsList = data.getMedicalrecords();
     	
     	String newBirthdate= medicalRecord.getBirthdate();

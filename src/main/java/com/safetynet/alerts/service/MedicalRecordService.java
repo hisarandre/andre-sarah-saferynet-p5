@@ -33,8 +33,8 @@ public class MedicalRecordService {
         return medicalRecordRepository.deleteMedicalRecord(firstName, lastName); 
     }
     
-    public MedicalRecord udapteMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName){
-    	return medicalRecordRepository.udapteMedicalRecord(medicalRecord, firstName, lastName);
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord, String firstName, String lastName){
+    	return medicalRecordRepository.updateMedicalRecord(medicalRecord, firstName, lastName);
     }
     
     public int calculateAge(String date) {

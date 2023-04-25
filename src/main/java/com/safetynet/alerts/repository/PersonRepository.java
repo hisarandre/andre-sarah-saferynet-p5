@@ -52,9 +52,9 @@ public class PersonRepository {
      * @param person The updated Person object.
      * @param firstName The first name of the person(s) to be updated.
      * @param lastName The last name of the person(s) to be updated.
-     * @return person udapted.
+     * @return person updated.
      */
-    public Person udaptePerson(Person person, String firstName, String lastName) {
+    public Person updatePerson(Person person, String firstName, String lastName) {
     	List<Person> personsList = data.getPersons();
     	
     	String newAddress = person.getAddress();

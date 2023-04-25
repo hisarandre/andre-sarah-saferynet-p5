@@ -76,7 +76,7 @@ class FirestationControllerTest {
 	    mockResponse.setStation("1");
 	    mockResponse.setAddress("une rue");
 
-	    when(firestationService.udapteFirestation(any(Firestation.class), eq("une rue")))
+	    when(firestationService.updateFirestation(any(Firestation.class), eq("une rue")))
 	            .thenReturn(mockResponse);
 
 	    String updatedFirestation = "{\"address\":\"9 rue grande\",\"station\":\"1\"}";
@@ -107,7 +107,7 @@ class FirestationControllerTest {
 	}
 
 	@Test
-	public void TestudapteFirestationNotFound() throws Exception {
+	public void TestupdateFirestationNotFound() throws Exception {
 	    Firestation firestation = new Firestation();
 	    firestation.setStation("1");
         String newFirestation = "{\"address\":\"100 rue de lyon\",\"station\":\"99\"}";

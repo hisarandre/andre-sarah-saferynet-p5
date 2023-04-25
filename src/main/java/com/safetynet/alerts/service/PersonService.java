@@ -30,8 +30,8 @@ public class PersonService {
         return personRepository.deletePerson(firstName, lastName);
     }
     
-    public Person udaptePerson(Person person, String firstName, String lastName){
-        return personRepository.udaptePerson(person, firstName, lastName);
+    public Person updatePerson(Person person, String firstName, String lastName){
+        return personRepository.updatePerson(person, firstName, lastName);
     	
     }
     

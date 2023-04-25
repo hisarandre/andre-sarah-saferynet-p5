@@ -31,8 +31,8 @@ public class FirestationService {
         return firestationRepository.deleteFirestation(address, station);
     }
     
-    public Firestation udapteFirestation(Firestation firestation, String address) {
-    	return firestationRepository.udapteFirestation(firestation, address);
+    public Firestation updateFirestation(Firestation firestation, String address) {
+    	return firestationRepository.updateFirestation(firestation, address);
     }
     
     public List<String> findAdressesByStation(String station) {

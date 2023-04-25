@@ -104,9 +104,9 @@ public class PersonServiceTest {
         updatedPerson.setFirstName("Jay");
         updatedPerson.setLastName("Dean");
         
-        when(personRepository.udaptePerson(updatedPerson, "Jay", "Dean")).thenReturn(updatedPerson);
+        when(personRepository.updatePerson(updatedPerson, "Jay", "Dean")).thenReturn(updatedPerson);
 
-        Person actualPerson = personService.udaptePerson(updatedPerson, "Jay", "Dean");
+        Person actualPerson = personService.updatePerson(updatedPerson, "Jay", "Dean");
 
         assertEquals(updatedPerson.getFirstName(), actualPerson.getFirstName());
         assertEquals(updatedPerson.getLastName(), actualPerson.getLastName());

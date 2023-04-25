@@ -84,13 +84,13 @@ public class MedicalRecordServiceTest {
         expectedMedicalRecordAfterUpdate.setLastName(lastNameToUpdate);
         expectedMedicalRecordAfterUpdate.setBirthdate("01/01/1970");
 
-        when(medicalRecordRepository.udapteMedicalRecord(eq(medicalRecordToUpdate), eq(firstNameToUpdate), eq(lastNameToUpdate))).thenReturn(expectedMedicalRecordAfterUpdate);
+        when(medicalRecordRepository.updateMedicalRecord(eq(medicalRecordToUpdate), eq(firstNameToUpdate), eq(lastNameToUpdate))).thenReturn(expectedMedicalRecordAfterUpdate);
 
-        MedicalRecord actualMedicalRecordAfterUpdate = medicalRecordService.udapteMedicalRecord(medicalRecordToUpdate, firstNameToUpdate, lastNameToUpdate);
+        MedicalRecord actualMedicalRecordAfterUpdate = medicalRecordService.updateMedicalRecord(medicalRecordToUpdate, firstNameToUpdate, lastNameToUpdate);
 
         assertThat(actualMedicalRecordAfterUpdate).isEqualTo(expectedMedicalRecordAfterUpdate);
 
-        verify(medicalRecordRepository).udapteMedicalRecord(eq(medicalRecordToUpdate), eq(firstNameToUpdate), eq(lastNameToUpdate));
+        verify(medicalRecordRepository).updateMedicalRecord(eq(medicalRecordToUpdate), eq(firstNameToUpdate), eq(lastNameToUpdate));
     }
 
     @Test

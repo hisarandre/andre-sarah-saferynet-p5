@@ -160,15 +160,15 @@ public class FirestationServiceTest {
 		firestation.setStation("1");
 		
 	    String address = "1234 Main St";
-	    when(firestationRepository.udapteFirestation(any(Firestation.class), any(String.class))).thenReturn(firestation);
+	    when(firestationRepository.updateFirestation(any(Firestation.class), any(String.class))).thenReturn(firestation);
 
 	    // Act
-	    Firestation result = firestationService.udapteFirestation(firestation, address);
+	    Firestation result = firestationService.updateFirestation(firestation, address);
 
 	    // Assert
 	    assertNotNull(result);
 	    assertEquals(firestation.getAddress(), result.getAddress());
 	    assertEquals(firestation.getStation(), result.getStation());
-	    verify(firestationRepository, times(1)).udapteFirestation(firestation, address);
+	    verify(firestationRepository, times(1)).updateFirestation(firestation, address);
 	}
 }
